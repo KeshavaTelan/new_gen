@@ -1,0 +1,19 @@
+.texthr {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    
+}
+.texthrtext {
+    padding-right: 15px;
+    
+}
+.texthrtext:not(:first-child) {
+    display: none;
+}
+.texthr::after {
+    flex: 1;
+    background: #c7c7c7;
+    content: "";
+    height: 1px;
+}
