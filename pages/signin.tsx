@@ -6,10 +6,26 @@ import {
   MDBBtn,
   MDBContainer,
   MDBIcon,
+  MDBValidation,
+  MDBValidationItem,
+  MDBInputGroup,
 } from "mdb-react-ui-kit";
 import styles from "../styles/signin.module.css";
+import { useRouter } from 'next/router'
+import { useState } from "react";
 
 export default function Signin() {
+  const [user, setUser] = useState({
+    emai: "",
+    password: "",
+  });
+
+let router= useRouter()
+
+  const onChange = (e: any) => {
+    setUser({ ...user, [e.target.name]: e.target.value });
+  };
+
   return (
     <>
       <div>
@@ -28,30 +44,51 @@ export default function Signin() {
                   To keep connected with us please <br />
                   login with your personal info
                 </p>
-                <form className="mt-5">
-                  <MDBInput
+
+                <MDBValidation className="mt-5">
+
+
+                  <MDBValidationItem
+                    feedback="Please Enter Valid USername/Email"
+                    invalid
                     className="mb-4"
-                    type="email"
-                    id="form2Example1"
-                    label="Email address"
-                  />
-                  <MDBInput
+                  >
+                    <MDBInput
+                      name="password"
+                      onChange={onChange}
+                      required
+                      type="email"
+                      label="Username"
+                      className="form-control "
+                      color="secondary"
+                    />
+                  </MDBValidationItem>
+
+                  <MDBValidationItem
+                    feedback="Password DO not Match Please Try Again"
+                    invalid
                     className="mb-4"
-                    type="password"
-                    id="form2Example2"
-                    label="Password"
-                  />
+                  >
+                    <MDBInput
+                      name="password"
+                      onChange={onChange}
+                      required
+                      label="Password"
+                      className="form-control "
+                      color="secondary"
+                    />
+                  </MDBValidationItem>
 
                   <MDBRow className="mb-4">
                     <MDBCol className="d-flex justify-content-center">
                       <MDBCheckbox
                         id="form2Example3"
                         label="Remember me"
-                        defaultChecked
+                        
                       />
                     </MDBCol>
                     <MDBCol>
-                      <a href="#!">Forgot password?</a>
+                      <a href=""   onClick={()=>{router.push('/forgotpassword')}}>Forgot password?</a>
                     </MDBCol>
                   </MDBRow>
 
@@ -63,35 +100,36 @@ export default function Signin() {
                   >
                     Sign in
                   </MDBBtn>
-
-                  <div className="text-center">
-                    <div className={styles.textcenter}>
-                      <div className={styles.texthr}>
-                        <span className={styles.texthrtext}>Or Login With</span>
-                      </div>
+                </MDBValidation>
+                <div className="text-center">
+                  <div className={styles.textcenter}>
+                    <div className={styles.texthr}>
+                      <span className={styles.texthrtext}>Or Login With</span>
                     </div>
+                  </div>
 
-                    <div className="my-4">
-                      <MDBBtn floating color="secondary" className="mx-3">
-                        <MDBIcon fab icon="facebook-f" />
-                      </MDBBtn>
+                  <div className="my-4">
+                    <MDBBtn floating color="secondary" className="mx-3">
+                      <MDBIcon fab icon="facebook-f" />
+                    </MDBBtn>
 
-                      <MDBBtn floating color="secondary" className="mx-3">
-                        <MDBIcon fab icon="google" />
-                      </MDBBtn>
-                    </div>
-                    <p className=" text-primary fw-bold ">
-                  Create an Account With Us
-                </p>
-                <MDBBtn
+                    <MDBBtn floating color="secondary" className="mx-3">
+                      <MDBIcon fab icon="google" />
+                    </MDBBtn>
+                  </div>
+                  <p className=" text-primary fw-bold ">
+                    Create an Account With Us
+                  </p>
+                  <MDBBtn
                     type="submit"
                     className="mb-4 border border-primary"
                     block
-                    color='tertiary'
-                  >Get Started
+                    color="tertiary"
+                  
+                  >
+                    Get Started
                   </MDBBtn>
-                  </div>
-                </form>
+                </div>
               </div>
             </MDBContainer>
             <br />
