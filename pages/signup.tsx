@@ -248,7 +248,7 @@ import {
   
                     <div className="my-4">
                       <MDBBtn floating color="secondary" className="mx-3">
-                        <MDBIcon fab icon="facebook-f" />
+                        <MDBIcon fab icon="microsoft" />
                       </MDBBtn>
   
                       <MDBBtn floating color="secondary" className="mx-3">

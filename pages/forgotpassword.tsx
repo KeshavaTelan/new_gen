@@ -5,29 +5,32 @@ import {
   MDBCheckbox,
   MDBBtn,
   MDBContainer,
-  MDBModal,
-  MDBModalDialog,
-  MDBModalContent,
-  MDBModalHeader,
-  MDBModalTitle,
-  MDBModalBody,
-  MDBModalFooter,
 } from "mdb-react-ui-kit";
 import styles from "../styles/forgotpassword.module.css";
 import { useState } from "react";
+import Popup from "./popup";
+import { useRouter } from 'next/router'
 
 
 
 
 export default function Forgotpassword() {
-  const [centredModal, setCentredModal] = useState(false);
 
-  const toggleShow = () => setCentredModal(!centredModal);
+  const [modelshow ,setModelShow]=useState<boolean>(false);
+
+  const onHise =()=>{
+    return setModelShow(false)
+  }
+
+  let router= useRouter()
+
 
   return (
     <>
       
-      
+      {
+        modelshow && ( <Popup show={modelshow} onHide={onHise}/>)
+      }
 
       <div>
 
@@ -63,7 +66,7 @@ export default function Forgotpassword() {
                     className="mt-4 mb-2 border border-primary"
                     block
                     color="secondary"
-                    onClick={toggleShow}
+                    onClick={()=>{setModelShow(true)}}
                   >
                     Send OTP
                   </MDBBtn>
@@ -73,6 +76,7 @@ export default function Forgotpassword() {
                     className="mb-2 border border-primary"
                     block
                     color="tertiary"
+                    onClick={()=>{router.push('/signin')}}
                   >
                     Back to Login
                   </MDBBtn>
@@ -84,41 +88,7 @@ export default function Forgotpassword() {
         </MDBRow>
        
       </div>
-      <MDBModal tabIndex="-1" show={centredModal} setShow={setCentredModal}>
-        <MDBModalDialog centered>
-          <MDBModalContent>
-            <MDBModalHeader>
-              <MDBModalTitle>
-          
-                <h4 className=" fw-bold text-primary">
-                  Verification
-                </h4>
-              </MDBModalTitle>
-              <MDBBtn
-                className="btn-close"
-                color="none"
-                onClick={toggleShow}
-              ></MDBBtn>
-            </MDBModalHeader>
-            <MDBModalBody>
-                              <p>
-                Enter the six digit OTP sent to email usermail@email.com
-              </p>
-              <p>
-                Cras mattis consectetur purus sit amet fermentum. Cras justo
-                odio, dapibus ac facilisis in, egestas eget quam. Morbi leo
-                risus, porta ac consectetur ac, vestibulum at eros.
-              </p>
-            </MDBModalBody>
-            <MDBModalFooter>
-              <MDBBtn color="secondary" onClick={toggleShow}>
-                Close
-              </MDBBtn>
-              <MDBBtn>Save changes</MDBBtn>
-            </MDBModalFooter>
-          </MDBModalContent>
-        </MDBModalDialog>
-      </MDBModal>
+
     </>
   );
 }
